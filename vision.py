@@ -34,6 +34,7 @@ if uploaded_file is not None:
     image = Image.open(uploaded_file)
     st.image(image, caption="Uploaded Image.", width=300)
 
+    
     st.markdown(
         """
         <style>
@@ -48,8 +49,12 @@ if uploaded_file is not None:
 # If submit button is clicked
 if submit:
     response = get_gemini_response(input, image)
-    st.subheader("The response is")
-    st.write(response)
+    # Display the response in a block-like box
+    st.markdown(
+        f"""<div style="border: 0.5px solid #3a3a3a; padding: 10px; border-radius: 5px;">{response}<div>""",
+
+        unsafe_allow_html=True
+    )
 
 # Display chat history
 if 'chat_history' not in st.session_state:
