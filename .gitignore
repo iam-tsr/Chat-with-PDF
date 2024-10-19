@@ -1,3 +1,2 @@
 .env
-venv# created by virtualenv automatically
-venv/bin
+venv
