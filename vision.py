@@ -18,7 +18,7 @@ def get_gemini_response(input, image):
     return response.text
 
 # Initialize our Streamlit page
-st.set_page_config(page_title="Gemini App to extract text from image", layout="wide")
+st.set_page_config(page_title="Chatbot", layout="wide")
 st.sidebar.title("Chat History")
 # st.sidebar.markdown("Use the sidebar to navigate through different functionalities.")
 
