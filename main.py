@@ -1,66 +1,63 @@
 import streamlit as st
 from dotenv import load_dotenv
-from PIL import Image
 import os
-import google.generativeai as genai
+from file_extractor import load_dataset
 
 load_dotenv()
 
-genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+# Load your dataset
+dataset_content = load_dataset("VONG.pdf")
 
-model = genai.GenerativeModel("gemini-1.5-flash")
+# Debug: Print dataset content length
+print(f"Dataset content length: {len(dataset_content)}")
 
-def get_gemini_response(input, image):
-    if input != "":
-        response = model.generate_content([input, image])
+# Define your keywords
+keywords = ["vong", "keyword2", "keyword3"]  # Add more keywords as needed
+
+# Function to check if input is relevant
+def is_relevant_input(input, keywords):
+    for keyword in keywords:
+        if keyword.lower() in input.lower():
+            return True
+    return False
+
+# Function to handle input and generate response
+def handle_input(input):
+    # Check if input matches any keyword
+    if is_relevant_input(input, keywords):
+        # Extract relevant part from dataset content
+        start_index = dataset_content.lower().find(input.lower())
+        if start_index != -1:
+            end_index = start_index + 200  # Adjust the number of characters to extract as needed
+            response_text = f"Based on the information I have about '{input}', here's what I found:\n\n"
+            response_text += dataset_content[start_index:end_index]
+            return response_text
+        else:
+            return "Sorry, I couldn't find relevant information in the dataset."
     else:
-        response = model.generate_content(image)
-    return response.text
+        return "Sorry, your input is out of context."
 
+# Initialize chat history
+if 'chat_history' not in st.session_state:
+    st.session_state.chat_history = []
 
 st.set_page_config(page_title="Chatbot", layout="wide")
 st.sidebar.title("Chat History")
 
+# Display chat history in reverse order (newest at the top)
+for chat in reversed(st.session_state.chat_history):
+    st.sidebar.write(chat)
 
 st.header("Gemini Chatbot")
 with st.form(key='input_form'):
     input = st.text_input("Input Prompt: ", key="input")
-    uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png", "wpeg"])
-    submit = st.form_submit_button("Tell me about the image")
-
-image = ""
-if uploaded_file is not None:
-    image = Image.open(uploaded_file)
-    st.image(image, caption="Uploaded Image.", width=300)
-
-    
-    st.markdown(
-        """
-        <style>
-        button[title="View fullscreen"] {
-            display: none;
-        }
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
+    submit = st.form_submit_button("Submit")
 
 if submit:
-    response = get_gemini_response(input, image)
-
-    st.markdown(
-        f"""<div style="border: 0.5px solid #3a3a3a; padding: 10px; border-radius: 5px;">{response}<div>""",
-
-        unsafe_allow_html=True
-    )
-
-if 'chat_history' not in st.session_state:
-    st.session_state['chat_history'] = []
-
-if submit and input:
-    st.session_state['chat_history'].append(("You", input))
-    st.session_state['chat_history'].append(("Bot", response))
-
-# st.sidebar.subheader("Chat History")
-for role, text in st.session_state['chat_history']:
-    st.sidebar.write(f"{role}: {text}")
+    response = handle_input(input)
+    st.write(response)
+    # Debug: Print response
+    print(f"Response: {response}")
+    # Update chat history
+    st.session_state.chat_history.append(f"Bot: {response}")
+    st.session_state.chat_history.append(f"User: {input}")
