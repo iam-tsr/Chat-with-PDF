@@ -17,12 +17,11 @@ def get_gemini_response(input, image):
         response = model.generate_content(image)
     return response.text
 
-# Initialize our Streamlit page
+
 st.set_page_config(page_title="Chatbot", layout="wide")
 st.sidebar.title("Chat History")
-# st.sidebar.markdown("Use the sidebar to navigate through different functionalities.")
 
-# Create a form for input and button
+
 st.header("Gemini Chatbot")
 with st.form(key='input_form'):
     input = st.text_input("Input Prompt: ", key="input")
@@ -46,17 +45,15 @@ if uploaded_file is not None:
         unsafe_allow_html=True
     )
 
-# If submit button is clicked
 if submit:
     response = get_gemini_response(input, image)
-    # Display the response in a block-like box
+
     st.markdown(
         f"""<div style="border: 0.5px solid #3a3a3a; padding: 10px; border-radius: 5px;">{response}<div>""",
 
         unsafe_allow_html=True
     )
 
-# Display chat history
 if 'chat_history' not in st.session_state:
     st.session_state['chat_history'] = []
 
