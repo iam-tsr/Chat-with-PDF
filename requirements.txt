@@ -5,6 +5,6 @@ langchain
 PyPDF2
 faiss-cpu
 langchain-google-genai
-PyPDF2
 pandas
 python-docx
+chromadb
