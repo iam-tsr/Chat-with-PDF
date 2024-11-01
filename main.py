@@ -74,7 +74,7 @@ def user_input(user_question):
 
 def main():
     st.set_page_config("Chat PDF")
-    st.header("Chat with PDF using Gemini💁")
+    st.header("Chat with PDFs")
     
     # Initialize session state for tracking conversions
     if 'converted_files' not in st.session_state:
@@ -86,7 +86,7 @@ def main():
     
     with st.sidebar:
         st.title("Menu:")
-        uploaded_files = st.file_uploader("Upload your Files", accept_multiple_files=True)
+        uploaded_files = st.file_uploader("Upload your Files", accept_multiple_files=False)
         
         if uploaded_files:
             # Separate PDF and non-PDF files
