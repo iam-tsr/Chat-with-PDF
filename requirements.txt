@@ -7,4 +7,4 @@ faiss-cpu
 langchain-google-genai
 pandas
 python-docx
-chromadb
+langchain-community
