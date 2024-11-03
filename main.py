@@ -14,8 +14,7 @@ import shutil
 import mimetypes
 
 load_dotenv()
-os.getenv("GOOGLE_API_KEY")
-genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+google_api_key = os.getenv("GOOGLE_API_KEY")
 
 # Create downloads directory if it doesn't exist
 DOWNLOADS_DIR = "downloads"
@@ -48,7 +47,7 @@ def get_conversational_chain():
 
     Answer:
     """
-    model = ChatGoogleGenerativeAI(model="gemini-pro", temperature=0.3)
+    model = ChatGoogleGenerativeAI(model="gemini-pro", temperature=0.2)
     prompt = PromptTemplate(template=prompt_template, input_variables=["context", "question"])
     chain = load_qa_chain(model, chain_type="stuff", prompt=prompt)
     return chain
@@ -86,17 +85,16 @@ def main():
     
     with st.sidebar:
         st.title("Menu:")
-        uploaded_files = st.file_uploader("Upload your Files", accept_multiple_files=False)
+        uploaded_file = st.file_uploader("Upload your File", accept_multiple_files=False)
         
-        if uploaded_files:
+        if uploaded_file:
             # Separate PDF and non-PDF files
             pdf_files = []
             non_pdf_files = []
-            for file in uploaded_files:
-                if is_pdf(file):
-                    pdf_files.append(file)
-                else:
-                    non_pdf_files.append(file)
+            if is_pdf(uploaded_file):
+                pdf_files.append(uploaded_file)
+            else:
+                non_pdf_files.append(uploaded_file)
             
             # Handle non-PDF files first
             if non_pdf_files:
@@ -133,26 +131,22 @@ def main():
                 return  # Stop here and don't show the Process button
         
         # Only show Process button if all files are PDFs
-        if uploaded_files and all(is_pdf(file) for file in uploaded_files):
+        if uploaded_file and is_pdf(uploaded_file):
             if st.button("Submit & Process"):
                 with st.spinner("Processing..."):
-                    processed_files = {}
-                    for uploaded_file in uploaded_files:
-                        temp_path = os.path.join(DOWNLOADS_DIR, uploaded_file.name)
-                        with open(temp_path, "wb") as f:
-                            f.write(uploaded_file.getbuffer())
-                        processed_files[uploaded_file.name] = temp_path
+                    temp_path = os.path.join(DOWNLOADS_DIR, uploaded_file.name)
+                    with open(temp_path, "wb") as f:
+                        f.write(uploaded_file.getbuffer())
                     
-                    # Process all PDFs
-                    raw_text = get_pdf_text(list(processed_files.values()))
+                    # Process the PDF
+                    raw_text = get_pdf_text([temp_path])
                     text_chunks = get_text_chunks(raw_text)
                     get_vector_store(text_chunks)
                     
                     # Clean up
-                    for path in processed_files.values():
-                        os.remove(path)
+                    os.remove(temp_path)
                     
-                    st.success(f"✅ Successfully processed {len(processed_files)} PDF files")
+                    st.success(f"✅ Successfully processed the PDF file")
                     
                     # Clear conversion history after successful processing
                     st.session_state.converted_files = {}
