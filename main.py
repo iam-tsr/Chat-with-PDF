@@ -115,7 +115,7 @@ def main():
         GOOGLE_API_KEY = st.sidebar.text_input("Enter your Google API Key", type="password")
         genai.configure(api_key=GOOGLE_API_KEY)
 
-        pdf_docs = st.file_uploader("Upload your PDF Files and Click on the Submit & Process Button", accept_multiple_files=True)
+        pdf_docs = st.file_uploader("Upload your PDF Files and Click on the Submit & Process Button", accept_multiple_files=True, type="pdf")
         if st.button("Submit & Process"):
             with st.spinner("Processing..."):
                 raw_text = get_pdf_text(pdf_docs)
