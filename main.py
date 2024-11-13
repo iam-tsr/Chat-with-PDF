@@ -8,6 +8,7 @@ from langchain.prompts import PromptTemplate
 from PyPDF2 import PdfReader
 import streamlit as st
 
+
 # Initialize conversation history
 conversation_history = []
 
@@ -97,25 +98,25 @@ def simplify_question(question):
     # Basic preprocessing steps
     question = question.lower().strip()  # Lowercase and trim whitespace
     question = question.replace("please", "").replace("could you", "").replace("?", "")
-    # More advanced NLP techniques could be applied here, such as paraphrasing
     return question
 
 # Main function to run the Streamlit app
 def main():
-    st.set_page_config(page_title="Chat PDF")
-    st.header("Chat with PDFs")
+    st.set_page_config(page_title="TSR")
+    st.header("Chat with PDF")
     user_question = st.text_input("Ask a Question from the PDF Files")
-    
+
     if user_question:
         user_input(user_question)
     
     with st.sidebar:
         st.title("Menu:")
-        api_key = st.text_input("Enter your Google API Key")
-        genai.configure(api_key=api_key)
 
-        pdf_docs = st.file_uploader("Upload your PDF Files", accept_multiple_files=True)
-        if st.button("Submit & Process") and pdf_docs:
+        GOOGLE_API_KEY = st.sidebar.text_input("Enter your Google API Key", type="password")
+        genai.configure(api_key=GOOGLE_API_KEY)
+
+        pdf_docs = st.file_uploader("Upload your PDF Files and Click on the Submit & Process Button", accept_multiple_files=True)
+        if st.button("Submit & Process"):
             with st.spinner("Processing..."):
                 raw_text = get_pdf_text(pdf_docs)
                 text_chunks = get_text_chunks(raw_text)
