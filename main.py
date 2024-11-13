@@ -7,12 +7,6 @@ from langchain.chains.question_answering import load_qa_chain
 from langchain.prompts import PromptTemplate
 from PyPDF2 import PdfReader
 import streamlit as st
-import os
-from dotenv import load_dotenv
-
-# Load environment variables
-load_dotenv()
-genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
 # Initialize conversation history
 conversation_history = []
