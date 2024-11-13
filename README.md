@@ -21,26 +21,23 @@ pip install -r requirements.txt
 ```
 
 ## Environment Setup
-1. **Google Generative AI API Key**: This application uses [Google's Generative AI API](https://ai.google.dev/). Store your API key in a `.env` file in the root directory:
+**Google Generative AI API Key**: This application uses [Google's Generative AI API](https://ai.google.dev/). Store your API key in a `.env` file in the root directory:
    ```plaintext
    GOOGLE_API_KEY=your_google_api_key_here
    ```
 
 ## Usage
-1. **Start the Streamlit App**:
+**Start the Streamlit App**:
    Run the application with:
    ```bash
    streamlit run main.py
    ```
-   
-2. **Upload PDF Files**:
-   - Use the sidebar to upload your PDF files.
-   - Click the "Submit & Process" button to process the files, extract and chunk the text, and store it for searching.
 
-3. **Ask Questions**:
-   - Type a question in the main input field to query the uploaded PDFs.
-   - The application will return the most relevant answer based on the document content.
+## License
+This project is licensed under the MIT License. See the [LICENSE](LICENCE) file for details.
 
-## Notes
-- **Data Storage**: The vector index is saved locally as `faiss_index`, which allows for quick loading and querying of processed document data.
-- **Generative AI Settings**: The model uses `gemini-pro` with a temperature setting of 0.3 to ensure relevant and accurate answers.
+## Contributing
+Contributions are welcome! Please open an issue or submit a pull request for any changes.
+
+## Contact
+For any inquiries, please contact tusharsoni.info@gmail.com.
