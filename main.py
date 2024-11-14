@@ -9,6 +9,8 @@ from PyPDF2 import PdfReader
 import streamlit as st
 import os
 from dotenv import load_dotenv
+import google.auth
+from googleapiclient.discovery import build
 
 # Initialize conversation history
 conversation_history = []
@@ -117,8 +119,15 @@ def main():
         # load_dotenv()
         # genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
-        GOOGLE_API_KEY = st.sidebar.text_input("Enter your Google API Key", type="password")
-        genai.configure(api_key=GOOGLE_API_KEY)
+        api_key = st.text_input("Enter your Gemini API key:", type="password")
+        if st.button("Submit"):
+            if api_key:
+                # Store the API key in Streamlit's session state for later use
+                st.session_state['gemini_api_key'] = api_key
+                genai.configure(api_key=api_key)
+                st.success("API key saved successfully!")
+            else:
+                st.error("Please enter a valid API key.")
 
         pdf_docs = st.file_uploader("Upload your PDF Files and Click on the Submit & Process Button", accept_multiple_files=True, type="pdf")
         if st.button("Submit & Process"):
