@@ -3,7 +3,7 @@
 ## Overview
 The **Chat with PDFs** application is a tool that allows users to upload PDF documents and interact with them by asking questions. The app processes the content of uploaded PDFs, splits the text into chunks, and stores it in a vectorized format to enable efficient similarity-based searches. Questions are then answered based on the document content using Google's Generative AI.
 
-**Deployed application** - [Talk-with-PDF](https://chats-with-pdf.streamlit.app/)
+**Deployed application** - [Talk-with-PDF](https://chat-with-pdf-bytsr.streamlit.app/)
 
 **Google Generative AI API Key**: This application uses [Google's Generative AI API](https://ai.google.dev/).
 
