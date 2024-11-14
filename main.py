@@ -7,7 +7,8 @@ from langchain.chains.question_answering import load_qa_chain
 from langchain.prompts import PromptTemplate
 from PyPDF2 import PdfReader
 import streamlit as st
-
+import os
+from dotenv import load_dotenv
 
 # Initialize conversation history
 conversation_history = []
@@ -111,6 +112,10 @@ def main():
     
     with st.sidebar:
         st.title("Menu:")
+
+        # ---In-case you want to use the Google API Key from the .env file---
+        # load_dotenv()
+        # genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
         GOOGLE_API_KEY = st.sidebar.text_input("Enter your Google API Key", type="password")
         genai.configure(api_key=GOOGLE_API_KEY)
