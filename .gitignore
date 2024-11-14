@@ -3,3 +3,5 @@
 __pycache__
 .deepsource.toml
 downloads/
+faiss_index/
+developer-pack/
