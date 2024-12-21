@@ -1,18 +1,30 @@
-import google.generativeai as genai
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_google_genai import GoogleGenerativeAIEmbeddings
-from langchain.vectorstores import FAISS
-from langchain_google_genai import ChatGoogleGenerativeAI
-from langchain.chains.question_answering import load_qa_chain
-from langchain.prompts import PromptTemplate
-from PyPDF2 import PdfReader
-import streamlit as st
 import os
+import google.generativeai as genai
+from langchain.vectorstores import FAISS
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.prompts import PromptTemplate
+from langchain.embeddings import HuggingFaceInstructEmbeddings  
+import streamlit as st
 from dotenv import load_dotenv
-
+from PyPDF2 import PdfReader
 
 # Initialize conversation history
 conversation_history = []
+
+load_dotenv()  # Load API key from .env file
+gemini_api_key = os.getenv("GEMINI_API_KEY")
+
+# Function to call Gemini API for text generation
+def call_gemini_api(prompt, api_key):
+    genai.configure(api_key=api_key)
+    model = genai.GenerativeModel("gemini-1.5-flash")  # Specify the Gemini model
+    response = model.generate_content(prompt)  
+
+    # Check if response is valid and return the generated content
+    if response:
+        return response.text
+    else:
+        return "I don't know."
 
 # PDF text extraction function
 def get_pdf_text(pdf_docs):
@@ -31,16 +43,15 @@ def get_text_chunks(text):
 
 # Create or load vector store
 def get_vector_store(text_chunks):
-    embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
+    embeddings = HuggingFaceInstructEmbeddings(model_name="hkunlp/instructor-large")
     vector_store = FAISS.from_texts(text_chunks, embedding=embeddings)
     vector_store.save_local("faiss_index")
 
 # Retrieve top-k most relevant chunks
 def get_relevant_context(user_question, top_k=5):
-    embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
-    new_db = FAISS.load_local("faiss_index", embeddings, allow_dangerous_deserialization=True)
-    docs = new_db.similarity_search(user_question, k=top_k)  # Retrieve top-k relevant chunks
-    return docs
+    embeddings = HuggingFaceInstructEmbeddings(model_name="hkunlp/instructor-large")
+    new_db = FAISS.load_local("faiss_index", embeddings)
+    docs = new_db.similarity_search(user_question, k=top_k)  
 
 # Format context from retrieved chunks
 def format_context(docs):
@@ -50,12 +61,12 @@ def format_context(docs):
 def manage_conversation_history(user_question, bot_response, max_turns=3):
     global conversation_history
     if len(conversation_history) >= max_turns * 2:
-        conversation_history = conversation_history[2:]  # Remove oldest interaction
+        conversation_history = conversation_history[2:]  
     conversation_history.extend([f"User: {user_question}", f"Bot: {bot_response}"])
     return "\n".join(conversation_history)
 
-# Define a prompt template with structured instructions
-def get_conversational_chain():
+# Define the prompt template
+def get_conversational_chain(api_key):
     prompt_template = """
     You are an intelligent assistant. Read the context carefully, and answer as if you're explaining to a person in a simple and friendly manner.
     Use plain language, avoid technical jargon, and provide a concise response. Only structure your answer in points if there are multiple distinct points or steps to explain.
@@ -71,31 +82,35 @@ def get_conversational_chain():
     - Structured as a list only if there are multiple points or steps
     - Accurate and based only on the context provided
     """
-    model = ChatGoogleGenerativeAI(model="gemini-pro", temperature=0.2)
-    prompt = PromptTemplate(template=prompt_template, input_variables=["context", "question"])
-    chain = load_qa_chain(model, chain_type="stuff", prompt=prompt)
-    return chain
+
+    # Create the RetrievalQA chain using the function to call Gemini API
+    def qa_chain(query, context):
+        prompt = prompt_template.format(context=context, question=query)
+        return call_gemini_api(prompt, api_key)
+
+    return qa_chain
 
 # Handle user input and generate response
-def user_input(user_question):
+def user_input(user_question, api_key):
     # Simplify the question to improve comprehension
     simplified_question = simplify_question(user_question)
-    
+
     # Retrieve relevant context from FAISS
     docs = get_relevant_context(simplified_question, top_k=5)
     context = format_context(docs)
-    
+
     # Generate response using the conversational chain
-    chain = get_conversational_chain()
-    response = chain({"input_documents": docs, "question": simplified_question}, return_only_outputs=True)
-    
+    chain = get_conversational_chain(api_key)
+    response = chain(simplified_question, context)
+
     # Manage conversation history
-    bot_response = response["output_text"]
+    bot_response = response
     conversation_history_text = manage_conversation_history(simplified_question, bot_response)
-    
+
     # Display the response
     st.write(bot_response)
-# TSR
+
+# TSR - Simplify the question
 def simplify_question(question):
     # Basic preprocessing steps
     question = question.lower().strip()  # Lowercase and trim whitespace
@@ -109,21 +124,16 @@ def main():
     user_question = st.text_input("Ask a Question from the PDF Files")
 
     if user_question:
-        user_input(user_question)
-    
+        user_input(user_question, gemini_api_key)
+
     with st.sidebar:
         st.title("Menu:")
-
-        # ---In-case you want to use the Google API Key from the .env file---
-        # load_dotenv()
-        # genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
         api_key = st.text_input("Enter your Gemini API key:", type="password")
         if st.button("Submit API Key"):
             if api_key:
                 # Store the API key in Streamlit's session state for later use
                 st.session_state['gemini_api_key'] = api_key
-                genai.configure(api_key=api_key)
                 st.success("API key saved successfully!")
             else:
                 st.error("Please enter a valid API key.")
@@ -142,4 +152,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-# TSR
