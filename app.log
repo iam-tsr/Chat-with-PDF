@@ -1,0 +1,102 @@
+2024-12-21 22:37:47,478 - INFO - Application started.
+2024-12-21 22:37:47,478 - INFO - Streamlit app started.
+2024-12-21 22:38:15,747 - INFO - Application started.
+2024-12-21 22:38:15,747 - INFO - Streamlit app started.
+2024-12-21 22:38:16,440 - INFO - Application started.
+2024-12-21 22:38:16,440 - INFO - Streamlit app started.
+2024-12-21 22:38:16,443 - INFO - API key saved successfully.
+2024-12-21 22:38:21,218 - INFO - Application started.
+2024-12-21 22:38:21,218 - INFO - Streamlit app started.
+2024-12-21 22:38:25,082 - INFO - Application started.
+2024-12-21 22:38:25,090 - INFO - Streamlit app started.
+2024-12-21 22:38:26,414 - INFO - Application started.
+2024-12-21 22:38:26,414 - INFO - Streamlit app started.
+2024-12-21 22:38:26,422 - INFO - Extracting text from PDF files.
+2024-12-21 22:38:27,623 - INFO - PDF text extraction complete.
+2024-12-21 22:38:27,623 - INFO - Splitting text into chunks.
+2024-12-21 22:38:27,636 - INFO - Creating or loading FAISS vector store.
+2024-12-21 22:38:41,789 - WARNING - From C:\Users\subinesh\AppData\Local\Programs\Python\Python311\Lib\site-packages\keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+2024-12-21 22:38:42,606 - INFO - Load pretrained SentenceTransformer: hkunlp/instructor-large
+2024-12-21 22:38:50,992 - INFO - Use pytorch device: cpu
+2024-12-21 22:39:10,365 - INFO - Loading faiss with AVX2 support.
+2024-12-21 22:39:10,365 - INFO - Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+2024-12-21 22:39:10,381 - INFO - Loading faiss.
+2024-12-21 22:39:10,568 - INFO - Successfully loaded faiss.
+2024-12-21 22:39:10,600 - INFO - Vector store saved locally.
+2024-12-21 22:39:10,600 - INFO - PDFs processed successfully.
+2024-12-21 22:39:11,209 - WARNING - From C:\Users\subinesh\AppData\Local\Programs\Python\Python311\Lib\site-packages\keras\src\backend.py:277: The name tf.reset_default_graph is deprecated. Please use tf.compat.v1.reset_default_graph instead.
+
+2024-12-21 22:39:36,907 - INFO - Application started.
+2024-12-21 22:39:36,907 - INFO - Streamlit app started.
+2024-12-21 22:39:36,907 - INFO - Simplifying user question.
+2024-12-21 22:39:36,907 - INFO - Retrieving top-5 relevant chunks for the question.
+2024-12-21 22:39:36,918 - INFO - Load pretrained SentenceTransformer: hkunlp/instructor-large
+2024-12-21 22:39:45,065 - INFO - Use pytorch device: cpu
+2024-12-21 22:39:45,825 - INFO - Formatting context from retrieved chunks.
+2024-12-21 22:39:45,825 - INFO - Creating conversational chain.
+2024-12-21 22:39:45,825 - INFO - Calling Gemini API.
+2024-12-21 22:39:48,087 - INFO - Response received from Gemini API.
+2024-12-21 22:39:48,087 - INFO - Updating conversation history.
+2024-12-21 22:39:55,085 - INFO - Application started.
+2024-12-21 22:39:55,085 - INFO - Streamlit app started.
+2024-12-21 22:39:55,085 - INFO - Simplifying user question.
+2024-12-21 22:39:55,085 - INFO - Retrieving top-5 relevant chunks for the question.
+2024-12-21 22:39:55,085 - INFO - Load pretrained SentenceTransformer: hkunlp/instructor-large
+2024-12-21 22:39:59,606 - INFO - Use pytorch device: cpu
+2024-12-21 22:40:00,043 - INFO - Formatting context from retrieved chunks.
+2024-12-21 22:40:00,043 - INFO - Creating conversational chain.
+2024-12-21 22:40:00,043 - INFO - Calling Gemini API.
+2024-12-21 22:40:01,825 - INFO - Response received from Gemini API.
+2024-12-21 22:40:01,840 - INFO - Updating conversation history.
+2024-12-21 22:42:34,035 - INFO - Starting Streamlit app.
+2024-12-21 22:42:34,035 - INFO - Starting Streamlit app.
+2024-12-21 22:42:54,418 - INFO - Starting Streamlit app.
+2024-12-21 22:42:55,361 - INFO - Starting Streamlit app.
+2024-12-21 22:42:55,361 - INFO - API key stored successfully.
+2024-12-21 22:42:55,802 - INFO - Starting Streamlit app.
+2024-12-21 22:42:55,806 - INFO - API key stored successfully.
+2024-12-21 22:43:02,545 - INFO - Starting Streamlit app.
+2024-12-21 22:43:03,624 - INFO - Starting Streamlit app.
+2024-12-21 22:43:03,635 - INFO - Extracting text from uploaded PDF files.
+2024-12-21 22:43:04,635 - INFO - Text extraction from PDFs completed.
+2024-12-21 22:43:04,639 - INFO - Splitting text into manageable chunks.
+2024-12-21 22:43:04,639 - INFO - Text split into 5 chunks.
+2024-12-21 22:43:04,639 - INFO - Creating and saving FAISS vector store.
+2024-12-21 22:43:19,020 - WARNING - From C:\Users\subinesh\AppData\Local\Programs\Python\Python311\Lib\site-packages\keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+2024-12-21 22:43:19,825 - INFO - Load pretrained SentenceTransformer: hkunlp/instructor-large
+2024-12-21 22:43:25,599 - INFO - Use pytorch device: cpu
+2024-12-21 22:43:44,204 - INFO - Loading faiss with AVX2 support.
+2024-12-21 22:43:44,204 - INFO - Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+2024-12-21 22:43:44,204 - INFO - Loading faiss.
+2024-12-21 22:43:44,301 - INFO - Successfully loaded faiss.
+2024-12-21 22:43:44,317 - INFO - FAISS vector store saved successfully.
+2024-12-21 22:43:44,325 - INFO - PDF processing completed.
+2024-12-21 22:43:44,803 - WARNING - From C:\Users\subinesh\AppData\Local\Programs\Python\Python311\Lib\site-packages\keras\src\backend.py:277: The name tf.reset_default_graph is deprecated. Please use tf.compat.v1.reset_default_graph instead.
+
+2024-12-21 22:47:41,045 - INFO - Starting Streamlit app.
+2024-12-21 22:47:41,045 - INFO - Processing user input: Whats the difference b\w these two docs ?
+2024-12-21 22:47:41,045 - INFO - Simplifying the question.
+2024-12-21 22:47:41,045 - INFO - Retrieving top-5 relevant chunks for the query.
+2024-12-21 22:47:41,045 - INFO - Load pretrained SentenceTransformer: hkunlp/instructor-large
+2024-12-21 22:47:49,117 - INFO - Use pytorch device: cpu
+2024-12-21 22:47:49,670 - INFO - Retrieved 5 relevant chunks.
+2024-12-21 22:47:49,863 - INFO - Formatting context from retrieved chunks.
+2024-12-21 22:47:49,863 - INFO - Context formatted successfully.
+2024-12-21 22:47:49,863 - INFO - Setting up conversational chain.
+2024-12-21 22:47:49,863 - INFO - Calling Gemini API.
+2024-12-21 22:47:52,938 - INFO - Received response from Gemini API.
+2024-12-21 22:47:52,938 - INFO - Managing conversation history.
+2024-12-21 22:47:52,938 - INFO - Conversation history updated.
+2024-12-21 23:22:52,865 - INFO - Creating and saving FAISS vector store.
+2024-12-21 23:22:52,865 - INFO - FAISS vector store saved successfully.
+2024-12-21 23:24:26,540 - INFO - Creating and saving FAISS vector store.
+2024-12-21 23:24:26,540 - INFO - Creating and saving FAISS vector store.
+2024-12-21 23:24:26,540 - INFO - FAISS vector store saved successfully.
+2024-12-21 23:24:26,540 - INFO - FAISS vector store saved successfully.
+2024-12-21 23:26:05,506 - INFO - Starting Streamlit app.
+2024-12-21 23:26:18,686 - INFO - Creating and saving FAISS vector store.
+2024-12-21 23:26:18,686 - INFO - FAISS vector store saved successfully.
