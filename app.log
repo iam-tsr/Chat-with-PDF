@@ -100,3 +100,167 @@ ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
 2024-12-21 23:26:05,506 - INFO - Starting Streamlit app.
 2024-12-21 23:26:18,686 - INFO - Creating and saving FAISS vector store.
 2024-12-21 23:26:18,686 - INFO - FAISS vector store saved successfully.
+2024-12-22 12:36:58,189 - WARNING - GEMINI_API_KEY not set in .env file. Ensure it's provided in the app.
+2024-12-22 12:36:58,189 - INFO - Starting Streamlit app.
+2024-12-22 12:38:29,635 - WARNING - GEMINI_API_KEY not set in .env file. Ensure it's provided in the app.
+2024-12-22 12:38:29,635 - INFO - Starting Streamlit app.
+2024-12-22 12:47:28,391 - WARNING - GEMINI_API_KEY not set in .env file. Ensure it's provided in the app.
+2024-12-22 12:47:28,391 - INFO - Starting Streamlit app.
+2024-12-22 12:47:39,044 - WARNING - GEMINI_API_KEY not set in .env file. Ensure it's provided in the app.
+2024-12-22 12:47:39,044 - INFO - Starting Streamlit app.
+2024-12-22 12:47:49,840 - WARNING - GEMINI_API_KEY not set in .env file. Ensure it's provided in the app.
+2024-12-22 12:47:49,840 - INFO - Starting Streamlit app.
+2024-12-22 12:49:43,491 - WARNING - GEMINI_API_KEY not set in .env file. Ensure it's provided in the app.
+2024-12-22 12:49:43,491 - INFO - Starting Streamlit app.
+2024-12-22 12:50:06,092 - WARNING - GEMINI_API_KEY not set in .env file. Ensure it's provided in the app.
+2024-12-22 12:50:06,092 - INFO - Starting Streamlit app.
+2024-12-22 12:50:10,218 - WARNING - GEMINI_API_KEY not set in .env file. Ensure it's provided in the app.
+2024-12-22 12:50:10,218 - INFO - Starting Streamlit app.
+2024-12-22 12:50:10,219 - INFO - Processing user input: 
+2024-12-22 12:50:10,219 - INFO - Simplifying the question.
+2024-12-22 12:50:10,219 - INFO - Retrieving top-5 relevant chunks for the query.
+2024-12-22 12:50:10,238 - ERROR - Error retrieving relevant context: Dependencies for InstructorEmbedding not found.
+2024-12-22 12:50:10,238 - INFO - Formatting context from retrieved chunks.
+2024-12-22 12:50:10,238 - INFO - Context formatted successfully.
+2024-12-22 12:50:10,239 - INFO - Setting up conversational chain.
+2024-12-22 12:50:10,239 - INFO - Calling Gemini API.
+2024-12-22 12:50:12,513 - INFO - Received response from Gemini API.
+2024-12-22 12:50:12,513 - INFO - Managing conversation history.
+2024-12-22 12:50:12,513 - INFO - Conversation history updated.
+2024-12-22 12:52:58,157 - WARNING - GEMINI_API_KEY not set in .env file. Ensure it's provided in the app.
+2024-12-22 12:52:58,157 - INFO - Starting Streamlit app.
+2024-12-22 12:53:03,014 - WARNING - GEMINI_API_KEY not set in .env file. Ensure it's provided in the app.
+2024-12-22 12:53:03,014 - INFO - Starting Streamlit app.
+2024-12-22 12:53:06,148 - WARNING - GEMINI_API_KEY not set in .env file. Ensure it's provided in the app.
+2024-12-22 12:53:06,148 - INFO - Starting Streamlit app.
+2024-12-22 12:53:06,148 - INFO - Extracting text from uploaded PDF files.
+2024-12-22 12:53:06,228 - INFO - Text extraction from PDFs completed.
+2024-12-22 12:53:06,228 - INFO - Splitting text into manageable chunks.
+2024-12-22 12:53:06,229 - INFO - Text split into 1 chunks.
+2024-12-22 12:53:06,229 - INFO - Creating and saving FAISS vector store.
+2024-12-22 12:53:06,229 - ERROR - Error creating/saving FAISS vector store: Dependencies for InstructorEmbedding not found.
+2024-12-22 12:53:06,229 - INFO - PDF processing completed.
+2024-12-22 12:53:06,230 - INFO - Processing user input: 
+2024-12-22 12:53:06,230 - INFO - Simplifying the question.
+2024-12-22 12:53:06,230 - INFO - Retrieving top-5 relevant chunks for the query.
+2024-12-22 12:53:06,230 - ERROR - Error retrieving relevant context: Dependencies for InstructorEmbedding not found.
+2024-12-22 12:53:06,230 - INFO - Formatting context from retrieved chunks.
+2024-12-22 12:53:06,230 - INFO - Context formatted successfully.
+2024-12-22 12:53:06,230 - INFO - Setting up conversational chain.
+2024-12-22 12:53:06,230 - INFO - Calling Gemini API.
+2024-12-22 12:53:08,276 - INFO - Received response from Gemini API.
+2024-12-22 12:53:08,276 - INFO - Managing conversation history.
+2024-12-22 12:53:08,276 - INFO - Conversation history updated.
+2024-12-22 12:55:04,727 - WARNING - GEMINI_API_KEY not set in .env file. Ensure it's provided in the app.
+2024-12-22 12:55:04,728 - INFO - Starting Streamlit app.
+2024-12-22 12:56:37,638 - WARNING - GEMINI_API_KEY not set in .env file. Ensure it's provided in the app.
+2024-12-22 12:56:37,638 - INFO - Starting Streamlit app.
+2024-12-22 12:56:37,639 - INFO - Processing user input: 
+2024-12-22 12:56:37,639 - INFO - Simplifying the question.
+2024-12-22 12:56:37,639 - INFO - Retrieving top-5 relevant chunks for the query.
+2024-12-22 12:56:37,640 - ERROR - Error retrieving relevant context: Dependencies for InstructorEmbedding not found.
+2024-12-22 12:56:37,640 - INFO - Formatting context from retrieved chunks.
+2024-12-22 12:56:37,640 - INFO - Context formatted successfully.
+2024-12-22 12:56:37,640 - INFO - Setting up conversational chain.
+2024-12-22 12:56:37,641 - INFO - Calling Gemini API.
+2024-12-22 12:56:39,640 - WARNING - GEMINI_API_KEY not set in .env file. Ensure it's provided in the app.
+2024-12-22 12:56:39,641 - INFO - Starting Streamlit app.
+2024-12-22 12:56:39,642 - INFO - Processing user input: dsa
+2024-12-22 12:56:39,642 - INFO - Simplifying the question.
+2024-12-22 12:56:39,642 - INFO - Retrieving top-5 relevant chunks for the query.
+2024-12-22 12:56:39,643 - ERROR - Error retrieving relevant context: Dependencies for InstructorEmbedding not found.
+2024-12-22 12:56:39,643 - INFO - Formatting context from retrieved chunks.
+2024-12-22 12:56:39,643 - INFO - Context formatted successfully.
+2024-12-22 12:56:39,643 - INFO - Setting up conversational chain.
+2024-12-22 12:56:39,643 - INFO - Calling Gemini API.
+2024-12-22 12:56:39,730 - INFO - Received response from Gemini API.
+2024-12-22 12:56:39,730 - INFO - Managing conversation history.
+2024-12-22 12:56:39,730 - INFO - Conversation history updated.
+2024-12-22 12:56:41,650 - INFO - Received response from Gemini API.
+2024-12-22 12:56:41,651 - INFO - Managing conversation history.
+2024-12-22 12:56:41,651 - INFO - Conversation history updated.
+2024-12-22 12:59:18,394 - WARNING - GEMINI_API_KEY not set in .env file. Ensure it's provided in the app.
+2024-12-22 12:59:18,394 - INFO - Starting Streamlit app.
+2024-12-22 12:59:18,396 - INFO - Processing user input: 
+2024-12-22 12:59:18,396 - INFO - Simplifying the question.
+2024-12-22 12:59:18,396 - INFO - Retrieving top-5 relevant chunks for the query.
+2024-12-22 12:59:18,397 - ERROR - Error retrieving relevant context: Dependencies for InstructorEmbedding not found.
+2024-12-22 12:59:18,397 - INFO - Formatting context from retrieved chunks.
+2024-12-22 12:59:18,397 - INFO - Context formatted successfully.
+2024-12-22 12:59:18,397 - INFO - Setting up conversational chain.
+2024-12-22 12:59:18,397 - INFO - Calling Gemini API.
+2024-12-22 12:59:20,387 - INFO - Received response from Gemini API.
+2024-12-22 12:59:20,387 - INFO - Managing conversation history.
+2024-12-22 12:59:20,387 - INFO - Conversation history updated.
+2024-12-22 12:59:38,987 - WARNING - GEMINI_API_KEY not set in .env file. Ensure it's provided in the app.
+2024-12-22 12:59:38,987 - INFO - Starting Streamlit app.
+2024-12-22 12:59:38,988 - INFO - Processing user input: 
+2024-12-22 12:59:38,988 - INFO - Simplifying the question.
+2024-12-22 12:59:38,988 - INFO - Retrieving top-5 relevant chunks for the query.
+2024-12-22 12:59:38,989 - ERROR - Error retrieving relevant context: Dependencies for InstructorEmbedding not found.
+2024-12-22 12:59:38,989 - INFO - Formatting context from retrieved chunks.
+2024-12-22 12:59:38,989 - INFO - Context formatted successfully.
+2024-12-22 12:59:38,989 - INFO - Setting up conversational chain.
+2024-12-22 12:59:38,989 - INFO - Calling Gemini API.
+2024-12-22 12:59:40,864 - INFO - Received response from Gemini API.
+2024-12-22 12:59:40,864 - INFO - Managing conversation history.
+2024-12-22 12:59:40,864 - INFO - Conversation history updated.
+2024-12-22 12:59:44,452 - WARNING - GEMINI_API_KEY not set in .env file. Ensure it's provided in the app.
+2024-12-22 12:59:44,452 - INFO - Starting Streamlit app.
+2024-12-22 12:59:44,453 - INFO - Extracting text from uploaded PDF files.
+2024-12-22 12:59:44,460 - INFO - Text extraction from PDFs completed.
+2024-12-22 12:59:44,460 - INFO - Splitting text into manageable chunks.
+2024-12-22 12:59:44,460 - INFO - Text split into 1 chunks.
+2024-12-22 12:59:44,460 - INFO - Creating and saving FAISS vector store.
+2024-12-22 12:59:44,461 - ERROR - Error creating/saving FAISS vector store: Dependencies for InstructorEmbedding not found.
+2024-12-22 12:59:44,461 - INFO - PDF processing completed.
+2024-12-22 12:59:44,462 - INFO - Processing user input: 
+2024-12-22 12:59:44,462 - INFO - Simplifying the question.
+2024-12-22 12:59:44,462 - INFO - Retrieving top-5 relevant chunks for the query.
+2024-12-22 12:59:44,463 - ERROR - Error retrieving relevant context: Dependencies for InstructorEmbedding not found.
+2024-12-22 12:59:44,464 - INFO - Formatting context from retrieved chunks.
+2024-12-22 12:59:44,464 - INFO - Context formatted successfully.
+2024-12-22 12:59:44,464 - INFO - Setting up conversational chain.
+2024-12-22 12:59:44,464 - INFO - Calling Gemini API.
+2024-12-22 12:59:46,333 - INFO - Received response from Gemini API.
+2024-12-22 12:59:46,333 - INFO - Managing conversation history.
+2024-12-22 12:59:46,333 - INFO - Conversation history updated.
+2024-12-22 12:59:55,438 - WARNING - GEMINI_API_KEY not set in .env file. Ensure it's provided in the app.
+2024-12-22 12:59:55,438 - INFO - Starting Streamlit app.
+2024-12-22 12:59:55,439 - INFO - Processing user input: 
+2024-12-22 12:59:55,439 - INFO - Simplifying the question.
+2024-12-22 12:59:55,440 - INFO - Retrieving top-5 relevant chunks for the query.
+2024-12-22 12:59:55,440 - ERROR - Error retrieving relevant context: Dependencies for InstructorEmbedding not found.
+2024-12-22 12:59:55,440 - INFO - Formatting context from retrieved chunks.
+2024-12-22 12:59:55,440 - INFO - Context formatted successfully.
+2024-12-22 12:59:55,440 - INFO - Setting up conversational chain.
+2024-12-22 12:59:55,440 - INFO - Calling Gemini API.
+2024-12-22 12:59:57,302 - INFO - Received response from Gemini API.
+2024-12-22 12:59:57,302 - INFO - Managing conversation history.
+2024-12-22 12:59:57,303 - INFO - Conversation history updated.
+2024-12-22 13:02:42,375 - WARNING - GEMINI_API_KEY not set in .env file. Ensure it's provided in the app.
+2024-12-22 13:02:42,375 - INFO - Starting Streamlit app.
+2024-12-22 13:02:42,376 - INFO - Processing user input: who is Tushar?
+2024-12-22 13:02:42,376 - INFO - Simplifying the question.
+2024-12-22 13:02:42,376 - INFO - Retrieving top-5 relevant chunks for the query.
+2024-12-22 13:02:42,377 - ERROR - Error retrieving relevant context: Dependencies for InstructorEmbedding not found.
+2024-12-22 13:02:42,377 - INFO - Formatting context from retrieved chunks.
+2024-12-22 13:02:42,377 - INFO - Context formatted successfully.
+2024-12-22 13:02:42,377 - INFO - Setting up conversational chain.
+2024-12-22 13:02:42,377 - INFO - Calling Gemini API.
+2024-12-22 13:02:44,488 - INFO - Received response from Gemini API.
+2024-12-22 13:02:44,488 - INFO - Managing conversation history.
+2024-12-22 13:02:44,488 - INFO - Conversation history updated.
+2024-12-22 13:02:50,840 - WARNING - GEMINI_API_KEY not set in .env file. Ensure it's provided in the app.
+2024-12-22 13:02:50,840 - INFO - Starting Streamlit app.
+2024-12-22 13:02:50,841 - INFO - Processing user input: who is Tushar Rajput?
+2024-12-22 13:02:50,842 - INFO - Simplifying the question.
+2024-12-22 13:02:50,842 - INFO - Retrieving top-5 relevant chunks for the query.
+2024-12-22 13:02:50,842 - ERROR - Error retrieving relevant context: Dependencies for InstructorEmbedding not found.
+2024-12-22 13:02:50,842 - INFO - Formatting context from retrieved chunks.
+2024-12-22 13:02:50,842 - INFO - Context formatted successfully.
+2024-12-22 13:02:50,843 - INFO - Setting up conversational chain.
+2024-12-22 13:02:50,843 - INFO - Calling Gemini API.
+2024-12-22 13:02:55,353 - INFO - Received response from Gemini API.
+2024-12-22 13:02:55,353 - INFO - Managing conversation history.
+2024-12-22 13:02:55,354 - INFO - Conversation history updated.

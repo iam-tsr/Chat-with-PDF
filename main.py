@@ -162,37 +162,29 @@ def main():
     logging.info("Starting Streamlit app.")
     st.set_page_config(page_title="TSR")
     st.header("Chat with PDF")
-    user_question = st.text_input("Ask a Question from the PDF Files")
 
-    if user_question:
-        user_input(user_question, gemini_api_key)
 
     with st.sidebar:
-        st.title("Menu:")
-
-        api_key = st.text_input("Enter your Gemini API key:", type="password")
-        if st.button("Submit API Key"):
-            if api_key:
-                st.session_state['gemini_api_key'] = api_key
-                logging.info("API key stored successfully.")
-                st.success("API key saved successfully!")
+        st.header("Instructions")
+        
+        pdf_docs = st.file_uploader("Upload your PDF Files", accept_multiple_files=True, type="pdf")
+        if st.button("Submit & Process PDFs"):
+            if pdf_docs:
+                with st.spinner("Processing PDFs..."):
+                    raw_text = get_pdf_text(pdf_docs)
+                    text_chunks = get_text_chunks(raw_text)
+                    get_vector_store(text_chunks)
+                    st.success("PDFs processed successfully!")
+                    logging.info("PDF processing completed.")
             else:
-                logging.error("Invalid API key.")
-                st.error("Please enter a valid API key.")
+                logging.warning("No PDF files uploaded.")
+                st.error("Please upload PDF files to process.")
 
-        if 'gemini_api_key' in st.session_state:
-            pdf_docs = st.file_uploader("Upload your PDF Files", accept_multiple_files=True, type="pdf")
-            if st.button("Submit & Process PDFs"):
-                if pdf_docs:
-                    with st.spinner("Processing PDFs..."):
-                        raw_text = get_pdf_text(pdf_docs)
-                        text_chunks = get_text_chunks(raw_text)
-                        get_vector_store(text_chunks)
-                        st.success("PDFs processed successfully!")
-                        logging.info("PDF processing completed.")
-                else:
-                    logging.warning("No PDF files uploaded.")
-                    st.error("Please upload PDF files to process.")
+    try: 
+        user_question = st.text_input("Ask a Question from the PDF Files")
+        user_input(user_question, gemini_api_key)
+    except:
+        st.error("Please upload PDF files to process.")
 
 if __name__ == "__main__":
     main()
