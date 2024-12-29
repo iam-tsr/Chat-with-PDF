@@ -5,6 +5,5 @@ langchain
 PyPDF2
 faiss-cpu
 langchain-google-genai
-pandas
 python-docx
 langchain-community
