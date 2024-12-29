@@ -1,15 +1,28 @@
-import google.generativeai as genai
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_google_genai import GoogleGenerativeAIEmbeddings
-from langchain.vectorstores import FAISS
-from langchain_google_genai import ChatGoogleGenerativeAI
-from langchain.chains.question_answering import load_qa_chain
-from langchain.prompts import PromptTemplate
-from PyPDF2 import PdfReader
-import streamlit as st
 import os
+import shutil
 from dotenv import load_dotenv
 
+import streamlit as st
+from PyPDF2 import PdfReader
+
+import google.generativeai as genai
+from langchain_google_genai import GoogleGenerativeAIEmbeddings, ChatGoogleGenerativeAI
+
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.vectorstores import FAISS
+from langchain.chains.question_answering import load_qa_chain
+from langchain.prompts import PromptTemplate
+
+
+# Load environment variables
+load_dotenv()
+genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+
+# Delete existing local files
+def delete_local(folder_path):
+    if os.path.exists(folder_path):
+        shutil.rmtree(folder_path)
+delete_local("faiss_index")
 
 # Initialize conversation history
 conversation_history = []
@@ -31,13 +44,13 @@ def get_text_chunks(text):
 
 # Create or load vector store
 def get_vector_store(text_chunks):
-    embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
+    embeddings = GoogleGenerativeAIEmbeddings(model="models/text-embedding-004")
     vector_store = FAISS.from_texts(text_chunks, embedding=embeddings)
     vector_store.save_local("faiss_index")
 
 # Retrieve top-k most relevant chunks
 def get_relevant_context(user_question, top_k=5):
-    embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001")
+    embeddings = GoogleGenerativeAIEmbeddings(model="models/text-embedding-004")
     new_db = FAISS.load_local("faiss_index", embeddings, allow_dangerous_deserialization=True)
     docs = new_db.similarity_search(user_question, k=top_k)  # Retrieve top-k relevant chunks
     return docs
@@ -71,7 +84,7 @@ def get_conversational_chain():
     - Structured as a list only if there are multiple points or steps
     - Accurate and based only on the context provided
     """
-    model = ChatGoogleGenerativeAI(model="gemini-pro", temperature=0.2)
+    model = ChatGoogleGenerativeAI(model="gemini-2.0-flash-exp", temperature=0.2)
     prompt = PromptTemplate(template=prompt_template, input_variables=["context", "question"])
     chain = load_qa_chain(model, chain_type="stuff", prompt=prompt)
     return chain
@@ -87,7 +100,7 @@ def user_input(user_question):
     
     # Generate response using the conversational chain
     chain = get_conversational_chain()
-    response = chain({"input_documents": docs, "question": simplified_question}, return_only_outputs=True)
+    response = chain.invoke({"input_documents": docs, "question": simplified_question}, return_only_outputs=True)
     
     # Manage conversation history
     bot_response = response["output_text"]
@@ -100,45 +113,39 @@ def simplify_question(question):
     # Basic preprocessing steps
     question = question.lower().strip()  # Lowercase and trim whitespace
     question = question.replace("please", "").replace("could you", "").replace("?", "")
+    # More advanced NLP techniques could be applied here, such as paraphrasing
     return question
 
 # Main function to run the Streamlit app
 def main():
-    st.set_page_config(page_title="TSR")
-    st.header("Chat with PDF")
-    user_question = st.text_input("Ask a Question from the PDF Files")
-
-    if user_question:
-        user_input(user_question)
+    st.set_page_config(page_title="Chat PDF")
+    st.header("Chat with PDFs")
     
     with st.sidebar:
         st.title("Menu:")
+        pdf_docs = st.file_uploader("Upload your PDF Files and Click on the Submit & Process Button", accept_multiple_files=True, type=["pdf"])
+        
+        if st.button("Submit & Process"):
+            
+            with st.spinner("Processing..."):
+                raw_text = get_pdf_text(pdf_docs)
+                text_chunks = get_text_chunks(raw_text)
+                get_vector_store(text_chunks)
+                st.success("Done")
 
-        # ---In-case you want to use the Google API Key from the .env file---
-        # load_dotenv()
-        # genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+        st.info("This app allows you to chat with PDF multiple files")
 
-        api_key = st.text_input("Enter your Gemini API key:", type="password")
-        if st.button("Submit API Key"):
-            if api_key:
-                # Store the API key in Streamlit's session state for later use
-                st.session_state['gemini_api_key'] = api_key
-                genai.configure(api_key=api_key)
-                st.success("API key saved successfully!")
-            else:
-                st.error("Please enter a valid API key.")
+    if not pdf_docs:
+        st.markdown("<h4>Instructions<", unsafe_allow_html=True)
 
-        if 'gemini_api_key' in st.session_state:
-            pdf_docs = st.file_uploader("Upload your PDF Files", accept_multiple_files=True, type="pdf")
-            if st.button("Submit & Process PDFs"):
-                if pdf_docs:
-                    with st.spinner("Processing PDFs..."):
-                        raw_text = get_pdf_text(pdf_docs)
-                        text_chunks = get_text_chunks(raw_text)
-                        get_vector_store(text_chunks)
-                        st.success("PDFs processed successfully!")
-                else:
-                    st.error("Please upload PDF files to process.")
+        st.write("1. Upload your PDF files")
+        st.write("2. Ask a question")
+        st.write("3. Get an answer")
+
+    else:
+        user_question = st.text_input("Ask a Question from the PDF Files")
+        if st.button("Ask"):
+            user_input(user_question)
 
 if __name__ == "__main__":
     main()
