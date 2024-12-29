@@ -18,11 +18,13 @@ from langchain.prompts import PromptTemplate
 load_dotenv()
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
-# Delete existing local files
-def delete_local(folder_path):
-    if os.path.exists(folder_path):
-        shutil.rmtree(folder_path)
-delete_local("faiss_index")
+# Delete existing local files (only once at the beginning)
+if "delete_done" not in st.session_state:
+    def delete_local(folder_path):
+        if os.path.exists(folder_path):
+            shutil.rmtree(folder_path)
+    delete_local("faiss_index")
+    st.session_state["delete_done"] = True
 
 # Initialize conversation history
 conversation_history = []
