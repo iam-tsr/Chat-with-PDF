@@ -5,8 +5,6 @@ The **Chat with PDFs** application is a tool that allows users to upload PDF doc
 
 **Deployed application** - [Chat-with-PDFs](https://chat-with-pdf-bytsr.streamlit.app/)
 
-**Google Generative AI API Key**: This application uses [Google's Generative AI API](https://ai.google.dev/).
-
 ## Features
 - **PDF Upload**: Allows users to upload one or multiple PDF files.
 - **Text Extraction and Chunking**: Extracts and chunks the text content of the PDFs for efficient processing.
